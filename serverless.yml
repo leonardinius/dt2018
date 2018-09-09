@@ -1,0 +1,43 @@
+service: dt2018
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment:
+    LAMBDA_TASK_ROOT: true
+
+plugins:
+  - serverless-offline
+
+functions:
+  index.html:
+    handler: bot.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /{styles}.css
+          method: get
+          cors: true
+
+  slack.auth:
+    handler: bot.handler
+    events:
+      - http:
+          path: /login
+          method: get
+      - http:
+          path: /oauth
+          method: get
+      - http:
+          path: /{login_status}.html
+          method: get
+
+  slack.webhooks:
+    handler: bot.handler
+    events:    
+      - http:
+          path: /slack/receive
+          method: post

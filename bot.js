@@ -68,7 +68,7 @@ const port = process.env.PORT || 3000;
 if (isInLambda) {
     const serverlessExpress = require('aws-serverless-express');
     const server = serverlessExpress.createServer(webserver);
-    exports.handler = (event, context) => serverlessExpress.proxy(server, event, context)
+    module.exports.handler = (event, context) => serverlessExpress.proxy(server, event, context)
 } else {
     var http = require('http');
     const server = http.createServer(webserver);
