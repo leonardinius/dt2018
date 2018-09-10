@@ -23,6 +23,9 @@ if (!process.env.clientId || !process.env.clientSecret || !process.env.PORT) {
   process.exit(1);
 }
 
+const isInLambda = !!process.env.LAMBDA_TASK_ROOT;
+const isInServerless = !!process.env.OFFLINE_LAMBDA_TASK_ROOT || isInLambda;
+
 var Botkit = require('botkit');
 var debug = require('debug')('botkit:main');
 
@@ -33,7 +36,7 @@ var bot_options = {
     scopes: ['bot'],
 };
 
-bot_options.json_file_store = __dirname + '/.data/db/'; // store user data in a simple JSON format
+bot_options.json_file_store = (isInLambda ? '/tmp/' : __dirname) + '/.data/db/'; // store user data in a simple JSON format
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.slackbot(bot_options);
@@ -63,9 +66,10 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
   require("./skills/" + file)(controller);
 });
 
-const isInLambda = !!process.env.LAMBDA_TASK_ROOT;
+webserver.locals['AWS_STAGE_URL_PREFIX'] = isInLambda ? process.env.AWS_STAGE_URL_PREFIX : '';
+
 const port = process.env.PORT || 3000;
-if (isInLambda) {
+if (isInServerless) {
     const serverlessExpress = require('aws-serverless-express');
     const server = serverlessExpress.createServer(webserver);
     module.exports.handler = (event, context) => serverlessExpress.proxy(server, event, context)

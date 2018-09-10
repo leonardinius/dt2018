@@ -2,15 +2,18 @@ service: dt2018
 
 provider:
   name: aws
+  stage: production
+  region: eu-west-1
   runtime: nodejs8.10
   environment:
-    LAMBDA_TASK_ROOT: true
+    AWS_STAGE_URL_PREFIX: /production
+    OFFLINE_LAMBDA_TASK_ROOT: true
 
 plugins:
   - serverless-offline
 
 functions:
-  index.html:
+  htmlIndex:
     handler: bot.handler
     events:
       - http:
@@ -18,11 +21,11 @@ functions:
           method: get
           cors: true
       - http:
-          path: /{styles}.css
+          path: /styles.css
           method: get
           cors: true
 
-  slack.auth:
+  slackAuth:
     handler: bot.handler
     events:
       - http:
@@ -32,10 +35,13 @@ functions:
           path: /oauth
           method: get
       - http:
-          path: /{login_status}.html
+          path: /login_success.html
+          method: get
+      - http:
+          path: /login_error.html
           method: get
 
-  slack.webhooks:
+  slackWebhooks:
     handler: bot.handler
     events:    
       - http:
