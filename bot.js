@@ -36,10 +36,21 @@ var bot_options = {
     scopes: ['bot'],
 };
 
-bot_options.json_file_store = (isInLambda ? '/tmp/' : __dirname) + '/.data/db/'; // store user data in a simple JSON format
+const admin = require('firebase-admin');
+var serviceAccount = require(process.env.FIREBASE_URI);
+if(!!!process.env.FIREBASE_INITIALIZED){
+  admin.initializeApp({credential: admin.credential.cert(serviceAccount)});
+  process.env.FIREBASE_INITIALIZED = true;
+}
 
-// Create the Botkit controller, which controls all instances of the bot.
-var controller = Botkit.slackbot(bot_options);
+ 
+var db = admin.firestore();
+
+var firebaseStorage = require('botkit-storage-firestore')({database: db}),
+    // Create the Botkit controller, which controls all instances of the bot.
+    controller = Botkit.slackbot({
+        storage: firebaseStorage
+    });
 
 controller.startTicking();
 

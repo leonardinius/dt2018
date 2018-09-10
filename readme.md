@@ -6,6 +6,7 @@
 yarn global add botkit
 yarn global add serverless
 yarn
+npm rebuild --target_platform=linux --target_libc=glibc
 ```
 
 ## How to run express app

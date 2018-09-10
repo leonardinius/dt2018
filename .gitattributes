@@ -1,0 +1,3 @@
+#pattern  filter=crypt diff=crypt
+
+dt2018-firebase-adminsdk-sertg.json filter=crypt diff=crypt
