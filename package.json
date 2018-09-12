@@ -4,12 +4,9 @@
   "description": "A starter kit for building a custom Slack bot with Botkit Studio",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
-    "offline": "serverless offline start",
-    "deploy": "serverless deploy"
+    "start": "node bot.js"
   },
   "dependencies": {
-    "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.15.2",
     "botkit": "^0.6.15",
     "botkit-storage-firestore": "^1.0.4",
@@ -24,7 +21,6 @@
     "wordfilter": "^0.2.6"
   },
   "devDependencies": {
-    "serverless-offline": "^3.25.11"
   },
   "keywords": [
     "bots",

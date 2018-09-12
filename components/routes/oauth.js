@@ -23,7 +23,7 @@ module.exports = function(webserver, controller) {
 
                 if (err) {
                     debug('Error confirming oauth', err);
-                    return res.redirect(webserver.locals.AWS_STAGE_URL_PREFIX + '/login_error.html');
+                    return res.redirect('/login_error.html');
                 }
 
                 // what scopes did we get approved for?
@@ -36,7 +36,7 @@ module.exports = function(webserver, controller) {
 
                     if (err) {
                         debug('Error fetching user identity', err);
-                        return res.redirect(webserver.locals.AWS_STAGE_URL_PREFIX + '/login_error.html');
+                        return res.redirect('/login_error.html');
                     }
 
                     // Now we've got all we need to connect to this user's team
@@ -53,7 +53,7 @@ module.exports = function(webserver, controller) {
 
                     res.cookie('team_id', auth.team_id);
                     res.cookie('bot_user_id', auth.bot.bot_user_id);
-                    res.redirect(webserver.locals.AWS_STAGE_URL_PREFIX + '/login_success.html');
+                    res.redirect('/login_success.html');
 
                 });
 

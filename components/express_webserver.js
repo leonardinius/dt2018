@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var http = require('http');
 var hbs = require('express-hbs');
 
 module.exports = function(controller) {
@@ -34,6 +35,12 @@ module.exports = function(controller) {
 
     webserver.use(express.static('public'));
 
+    const port = process.env.PORT || 3000;    
+    const server = http.createServer(webserver);
+    server.listen(port, null, function() {
+        console.log('Express webserver configured and listening at http://localhost:' + port);
+    });
+
     // import all the pre-defined routes that are present in /components/routes
     var normalizedPath = require("path").join(__dirname, "routes");
     require("fs").readdirSync(normalizedPath).forEach(function(file) {
@@ -41,7 +48,7 @@ module.exports = function(controller) {
     });
 
     controller.webserver = webserver;
-    //controller.httpserver = server;
+    controller.httpserver = server;
 
     return webserver;
 }
