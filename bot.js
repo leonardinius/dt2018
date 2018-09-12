@@ -42,13 +42,18 @@ if(!!!process.env.FIREBASE_INITIALIZED){
   admin.initializeApp({credential: admin.credential.cert(serviceAccount)});
   process.env.FIREBASE_INITIALIZED = true;
 }
-
- 
 var db = admin.firestore();
 
 var firebaseStorage = require('botkit-storage-firestore')({database: db}),
     // Create the Botkit controller, which controls all instances of the bot.
     controller = Botkit.slackbot({
+        debug: true || process.env.DEBUG == 'true',
+        require_delivery: true,
+        rtm_receive_messages: false,
+        send_via_rtm: false,
+        retry: 5,
+        stale_connection_timeout: 500,
+        interactive_replies: true,
         storage: firebaseStorage
     });
 
@@ -61,7 +66,6 @@ webserver.get('/', function(req, res){
   res.render('index', {
     domain: req.get('host'),
     protocol: req.protocol,
-    glitch_domain:  process.env.PROJECT_DOMAIN,
     layout: 'layouts/default'
   });
 })

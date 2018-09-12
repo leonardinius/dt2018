@@ -5,6 +5,7 @@ provider:
   stage: production
   region: eu-west-1
   runtime: nodejs8.10
+  memorySize: 512
   environment:
     AWS_STAGE_URL_PREFIX: /production
     OFFLINE_LAMBDA_TASK_ROOT: true

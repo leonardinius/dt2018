@@ -40,7 +40,6 @@ module.exports = function(controller) {
                 convo.activate();
             }
         });
-
     });
 
     controller.hears(['^say (.*)','^say'], 'direct_message,direct_mention', function(bot, message) {
