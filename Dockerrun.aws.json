@@ -1,0 +1,10 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Volumes": [
+      {
+        "ContainerDirectory": "/data",
+        "HostDirectory": "/data"
+      }
+    ],
+    "Logging": "/var/log/dt2018.log"
+  }
