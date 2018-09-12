@@ -10,3 +10,12 @@ yarn
 
 `yarn start`
 
+## Local Development
+
+Start local tunnel with fixed URL 
+
+```
+yarn global add localtunnel
+
+lt --port 3000 --subdomain dt2018
+```
