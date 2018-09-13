@@ -1,7 +1,9 @@
-node_modules
-
+.DS_Store
 .data
 *.log
+
+# NodeJS modules
+node_modules
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

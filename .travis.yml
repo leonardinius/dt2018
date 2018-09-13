@@ -1,0 +1,46 @@
+## .travis.yml secure parameters set in the travis admin panel
+# - SLACK_CLIENT_ID
+# - SLACK_CLIENT_SECRET
+# - DEPLOY_AWS_ACCESS_KEY_ID
+# - DEPLOY_AWS_SECRET_ACCESS_KEY
+# - ENCRYPT_SECRET_PASSWORD
+
+language: node_js
+node_js: node
+
+cache:
+  directories:
+    - "node_modules"
+
+install:
+  - yarn
+
+script:
+  - echo "add yarn test here!"
+
+before_deploy: 
+  - curl -L https://github.com/a8m/envsubst/releases/download/v1.0.0/envsubst-`uname -s`-`uname -m` -o envsubst
+  - chmod +x envsubst
+  - ./envsubst -no-unset -no-empty < .env.example > .env
+  - openssl enc -aes-256-cbc -pass env:ENCRYPT_SECRET_PASSWORD -d -a -in dt2018-firebase-adminsdk-sertg.json -out dt2018-firebase-adminsdk-sertg.json.dec && rm -f dt2018-firebase-adminsdk-sertg.json && mv dt2018-firebase-adminsdk-sertg.json.dec dt2018-firebase-adminsdk-sertg.json
+  - zip -r dt2018.zip . --exclude node_modules\* .elasticbeanstalk\* .git\*
+
+after_deploy:
+  - rm dt2018.zip
+  - rm .env
+  - rm dt2018-firebase-adminsdk-sertg.json
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: ${DEPLOY_AWS_ACCESS_KEY_ID}
+  secret_access_key: ${DEPLOY_AWS_SECRET_ACCESS_KEY}
+  region: "eu-wes-1"
+  app: "dt2018"
+  env: "gh-travis-master"
+  bucket_name: "dt2018-github-continious-deployment"
+
+  skip_cleanup: true
+  zip_file: dt2018.zip
+
+  on:
+    branch: master
