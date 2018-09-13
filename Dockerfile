@@ -8,7 +8,6 @@ ENV DEBUG false
 
 WORKDIR /app
 COPY . /app
-RUN chmod +x /app/docker/start.sh
 RUN yarn
 
-CMD ["/app/docker/start.sh"]
+CMD ["node", "bot.js"]
