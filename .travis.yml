@@ -23,12 +23,7 @@ before_deploy:
   - chmod +x envsubst
   - ./envsubst -no-unset -no-empty < .env.example > .env
   - openssl enc -aes-256-cbc -pass env:ENCRYPT_SECRET_PASSWORD -d -a -in dt2018-firebase-adminsdk-sertg.json -out dt2018-firebase-adminsdk-sertg.json.dec && rm -f dt2018-firebase-adminsdk-sertg.json && mv dt2018-firebase-adminsdk-sertg.json.dec dt2018-firebase-adminsdk-sertg.json
-  - zip -r dt2018.zip . --exclude node_modules\* .elasticbeanstalk\* .git\*
-
-after_deploy:
-  - rm dt2018.zip
-  - rm .env
-  - rm dt2018-firebase-adminsdk-sertg.json
+  - zip -q -r dt2018.zip . --exclude node_modules\* .elasticbeanstalk\* .git\*
 
 deploy:
   provider: elasticbeanstalk
@@ -44,3 +39,8 @@ deploy:
 
   on:
     branch: master
+
+after_deploy:
+  - rm dt2018.zip
+  - rm .env
+  - rm dt2018-firebase-adminsdk-sertg.json
