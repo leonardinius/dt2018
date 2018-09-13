@@ -29,7 +29,7 @@ deploy:
   provider: elasticbeanstalk
   access_key_id: ${DEPLOY_AWS_ACCESS_KEY_ID}
   secret_access_key: ${DEPLOY_AWS_SECRET_ACCESS_KEY}
-  region: "eu-wes-1"
+  region: "eu-west-1"
   app: "dt2018"
   env: "gh-travis-master"
   bucket_name: "dt2018-github-continious-deployment"
