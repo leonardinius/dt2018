@@ -6,5 +6,5 @@
         "HostDirectory": "/data"
       }
     ],
-    "Logging": "/var/log/dt2018.log"
+    "Logging": "/var/log/dt2018"
   }
