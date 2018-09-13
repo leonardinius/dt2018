@@ -1,8 +1,9 @@
 node_modules
 
-.git
 .data
-.elasticbeanstalk
 *.log
 
-
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+.git
+.gitignore
