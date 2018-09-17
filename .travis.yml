@@ -1,20 +1,29 @@
+## .travis.yml secure parameters set in the travis admin panel
+# - SLACK_CLIENT_ID
+# - SLACK_CLIENT_SECRET
+# - DEPLOY_AWS_ACCESS_KEY_ID
+# - DEPLOY_AWS_SECRET_ACCESS_KEY
+# - ENCRYPT_SECRET_PASSWORD
+
 language: node_js
 node_js: stable
+
 cache:
   directories:
   - node_modules
+
 install:
 - yarn
 script:
 - echo "add yarn test here!"
+
 before_deploy:
-- curl -L https://github.com/a8m/envsubst/releases/download/v1.0.0/envsubst-`uname
-  -s`-`uname -m` -o envsubst
+- curl -L https://github.com/a8m/envsubst/releases/download/v1.0.0/envsubst-`uname -s`-`uname -m` -o envsubst
 - chmod +x envsubst
 - "./envsubst -no-unset -no-empty < .env.example > .env"
-- openssl enc -aes-256-cbc -pass env:ENCRYPT_SECRET_PASSWORD -d -a -in dt2018-firebase-adminsdk-sertg.json
-  -out dt2018-firebase-adminsdk-sertg.json.dec && rm -f dt2018-firebase-adminsdk-sertg.json
-  && mv dt2018-firebase-adminsdk-sertg.json.dec dt2018-firebase-adminsdk-sertg.json
+- openssl enc -aes-256-cbc -pass env:ENCRYPT_SECRET_PASSWORD -d -a -in dt2018-firebase-adminsdk-sertg.json -out dt2018-firebase-adminsdk-sertg.json.dec
+- rm -f dt2018-firebase-adminsdk-sertg.json
+- mv dt2018-firebase-adminsdk-sertg.json.dec dt2018-firebase-adminsdk-sertg.json
 - zip -q -r dt2018.zip . --exclude node_modules\* .elasticbeanstalk\* .git\*
 deploy:
   provider: elasticbeanstalk
@@ -32,6 +41,7 @@ after_deploy:
 - rm dt2018.zip
 - rm .env
 - rm dt2018-firebase-adminsdk-sertg.json
+
 notifications:
   slack:
     secure: wJme6082bD/h8W9dL77aReK+qX2DuCI2+fh+y9I+QpzfJGeIqK9DGDHHoAHFFs7q+Fn2XQw4WwHkZzuPyaaR+ftPiIgvAMYm9XhtbpPXgeatyZyFVndXJiy3wqWcdMfliS7o4oHsZzh1qoGnG81q2it37fIAozzcjQRdrYvETnrLqoEdRhPPZXtJUMnnhy+ia0SKAMcgdDMfufjoHOt65nNL/qt6B/29pNdfPRoI1bNXE/gQFf9ZcGlFK+b6VBwk0hKNspv9UOJ95X3wreIfjNB0DXFSsWCe+LIAZYdDJ359wdKWqAzV+pJKoF0qa2VX9MekM1WcKeRZPd/7lx0jkmf9gkYXIqPf6IrEJdatNJn9pn55MtlEM2looDl80DWDubkWlRJs2pqJo2yPWVyjFHOfW25Sf9fc6DnMuzH9hlMETgd9kmeHKxhwu3qQZpLIArkU5SZidevI+pn5ve08xK8gqm4xPo3mZkePCtrt0nnU0GfZGW4FNf5JAw+Fb4HGZ0HqMsoSe0l/PNlZUYEtUXLr/XPp44CJCTuGv0lBLVYjxhHJ4wV0sxqTYMsJZSlfOhWwpGPS79xxtpCrqz9wLKRkDMAJy+nrYKJMFaUnlgM3QrGa0i4svwJBeRLBCbKe33LNKTbrLdK/MF+Ma0w38auHXQX/CKcVCM2oeFUzN4s=
