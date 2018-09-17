@@ -1,14 +1,15 @@
 module.exports = function(controller) {
-  controller.hears(["^job (.*)"], "direct_message", function(bot, message) {
+  controller.hears(["^job (.*)", "^job"], "direct_message,direct_mention", function(bot, message) {
     if (!message.match[1]) {
       bot.reply(message, "I will job post whatever you ask.");
       return;
     }
 
     bot.reply(message, {
-      text: message.match[1] + "\n\n<@" + message.user + "|Ask More>",
+      text: message.match[1] + "\n@" + message.user + " ask more",
       attachments: [
         {
+          text: "Do you like it?",
           callback_id: "123",
           attachment_type: "default",
           actions: [
