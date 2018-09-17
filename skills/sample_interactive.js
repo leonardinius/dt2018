@@ -41,6 +41,24 @@ module.exports = function(controller) {
       }
     );
 
-    bot.replyInteractive(message, message);
+    bot.replyInteractive(message, {
+      text: '...',
+      attachments: [
+        {
+          text: "Do you like it?",
+          callback_id: "123",
+          attachment_type: "default",
+          actions: [
+            {
+              name: "like",
+              text: "Like",
+              value: "like",
+              type: "button",
+              style: "primary"
+            }
+          ]
+        }
+      ]
+    });
   });
 };
