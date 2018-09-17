@@ -1,23 +1,23 @@
 module.exports = function(controller) {
-  controller.hears("interactive", "direct_message", function(bot, message) {
+  controller.hears(["^job (.*)"], "direct_message", function(bot, message) {
+    if (!message.match[1]) {
+      bot.reply(message, "I will job post whatever you ask.");
+      return;
+    }
+
     bot.reply(message, {
+      text: message.match[1] + "\n\n<@" + message.user + "|Ask More>",
       attachments: [
         {
-          title: "Do you want to interact with my buttons?",
           callback_id: "123",
           attachment_type: "default",
           actions: [
             {
-              name: "yes",
-              text: "Yes",
-              value: "yes",
-              type: "button"
-            },
-            {
-              name: "no",
-              text: "No",
-              value: "no",
-              type: "button"
+              name: "like",
+              text: "Like",
+              value: "like",
+              type: "button",
+              style: "primary"
             }
           ]
         }
@@ -27,36 +27,19 @@ module.exports = function(controller) {
 
   controller.on("interactive_message_callback", function(bot, message) {
     // check message.actions and message.callback_id to see what action to take...
-    bot.replyInteractive(message, {
-      text: "...",
-      attachments: [
-        {
-          title: "My buttons",
-          callback_id: "123",
-          attachment_type: "default",
-          actions: [
-            {
-              name: "yes",
-              text: "Yes!",
-              value: "yes",
-              type: "button"
-            },
-            {
-              text: "No!",
-              name: "no",
-              value: "delete",
-              style: "danger",
-              type: "button",
-              confirm: {
-                title: "Are you sure?",
-                text: "This will do something!",
-                ok_text: "Yes",
-                dismiss_text: "No"
-              }
-            }
-          ]
+    bot.api.reactions.add(
+      {
+        timestamp: message.ts,
+        channel: message.channel,
+        name: "robot_face"
+      },
+      function(err, res) {
+        if (err) {
+          bot.botkit.log("Failed to add emoji reaction :(", err);
         }
-      ]
-    });
+      }
+    );
+
+    bot.replyInteractive(message, message);
   });
 };
