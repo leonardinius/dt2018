@@ -10,7 +10,7 @@ module.exports = function(controller) {
     }
 
     if (message.command.startsWith("/jobadvert")) {
-      const parts = message.text .split("\n") .join("\n ") .split(" ");
+      const parts = message.text.split("\n").map(l => l.trim()).join("\n").split(" ");
       let sponsorName = parts[0].trim();
       while (sponsorName.startsWith("@")) {
         sponsorName = sponsorName.substring(1);
@@ -22,7 +22,7 @@ module.exports = function(controller) {
         return;
       }
 
-      const text = parts.slice(1) .join(" ") .trim();
+      const text = parts.slice(1).join(" ").trim() + "\n";
       bot.reply(message, {
         as_user: false,
         username: "Job@" + sponsor.name,
@@ -59,23 +59,17 @@ module.exports = function(controller) {
   });
 
   controller.on("interactive_message_callback", function(bot, message) {
-    var t = ""; //"\nMessage:```" + JSON.stringify(message).replace('```', 'code') + "```";
+    var t = ''; // "\nMessage:```" + JSON.stringify(message).replace('```', 'code') + "```";
     if (message.callback_id.startsWith("/jobadvert")) {
-      bot.api.reactions.add(
-        {
-          timestamp: message.message_ts,
-          channel: message.channel,
-          name: "+1"
-        },
-        function(err, res) {
-          if (err) {
-            bot.botkit.log("Failed to add emoji reaction :(", err);
-          }
-        }
-      );
+      
+      message.ts = message.message_ts;
+      bot.replyInThread(message, ':star2: <@' + message.user + '> liked the post :star2:' + t);
 
       var newMessage = message.original_message;
-      newMessage.text = newMessage.text + t;
+      let text = newMessage.text.split('\n');
+      text.pop();
+      text.push('' + ((newMessage.reply_count || 0) +1) + ' :+1: likes');
+      newMessage.text = text.join('\n') + t;
       bot.replyInteractive(message, newMessage);
     }
   });
