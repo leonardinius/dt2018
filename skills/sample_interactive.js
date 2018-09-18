@@ -1,38 +1,43 @@
 module.exports = function(controller) {
-  controller.hears(["^job (.*)", "^job"], "direct_message,direct_mention", function(bot, message) {
-    if (!message.match[1]) {
-      bot.reply(message, "I will job post whatever you ask.");
-      return;
-    }
+  controller.hears(
+    ["^job (.*)", "^job"],
+    "direct_message,direct_mention",
+    function(bot, message) {
+      if (!message.match[1]) {
+        bot.reply(message, "I will job post whatever you ask.");
+        return;
+      }
 
-    bot.reply(message, {
-      text: message.match[1] + "\n@" + message.user + " ask more",
-      attachments: [
-        {
-          text: "Do you like it?",
-          callback_id: "123",
-          attachment_type: "default",
-          actions: [
-            {
-              name: "like",
-              text: "Like",
-              value: "like",
-              type: "button",
-              style: "primary"
-            }
-          ]
-        }
-      ]
-    });
-  });
+      bot.reply(message, {
+        text: message.match[1] + "\n@" + message.user + " ask more",
+        attachments: [
+          {
+            text: "Do you like it?",
+            callback_id: "123",
+            attachment_type: "default",
+            actions: [
+              {
+                name: "like",
+                text: "Like",
+                value: "like",
+                type: "button",
+                style: "primary"
+              }
+            ]
+          }
+        ]
+      });
+    }
+  );
 
   controller.on("interactive_message_callback", function(bot, message) {
+    console.log(JSON.stringify(message));
     // check message.actions and message.callback_id to see what action to take...
     bot.api.reactions.add(
       {
-        timestamp: message.ts,
+        timestamp: message.message_ts,
         channel: message.channel,
-        name: "robot_face"
+        name: "+1"
       },
       function(err, res) {
         if (err) {
@@ -41,24 +46,6 @@ module.exports = function(controller) {
       }
     );
 
-    bot.replyInteractive(message, {
-      text: '...',
-      attachments: [
-        {
-          text: "Do you like it?",
-          callback_id: "123",
-          attachment_type: "default",
-          actions: [
-            {
-              name: "like",
-              text: "Like",
-              value: "like",
-              type: "button",
-              style: "primary"
-            }
-          ]
-        }
-      ]
-    });
+    bot.replyInteractive(message, message.original_message);
   });
 };

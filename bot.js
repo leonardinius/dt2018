@@ -33,7 +33,7 @@ var bot_options = {
   clientSecret: process.env.clientSecret,
   debug: process.env.DEBUG == "true",
   interactive_replies: true,
-  scopes: ["bot", "chat:write:bot"]
+  scopes: ["bot", "chat:write:bot", "commands"]
 };
 
 const firebase_admin = require("firebase-admin");
