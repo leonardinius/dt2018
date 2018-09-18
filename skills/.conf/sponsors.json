@@ -1,47 +1,47 @@
 {
     "cognizant" : {
-        "name": "cognizant",
-        "logo" : "https://devternity.com/images/cognizant.png",
+        "name": "Cognizant",
+        "logo" : "https://rsz.io/devternity.com/images/cognizant.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "eas" : {
-        "name": "eas",
-        "logo" : "https://devternity.com/images/eas.png",
+        "name": "EstoniaAtWork",
+        "logo" : "https://rsz.io/devternity.com/images/eas.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "4finance" : {
-        "name": "4finance",
-        "logo": "https://devternity.com/images/4finance.png",
+        "name": "4Finance",
+        "logo": "https://rsz.io/devternity.com/images/4finance.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "playtech" : {
-        "name": "playtech",
-        "logo": "https://devternity.com/images/playtech.jpg",
+        "name": "Playtech",
+        "logo": "https://rsz.io/devternity.com/images/playtech.jpg?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "visma" : {
-        "name": "visma",
-        "logo": "https://devternity.com/images/visma.jpg",
+        "name": "Visma",
+        "logo": "https://rsz.io/devternity.com/images/visma.jpg?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "printify" : {
-        "name": "printify",
-        "logo": "https://devternity.com/images/printify.png",
+        "name": "Printify",
+        "logo": "https://rsz.io/devternity.com/images/printify.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "devchampions" : {
-        "name": "devchampions",
-        "logo": "https://devternity.com/images/devchampions.png",
+        "name": "Devchampions",
+        "logo": "https://rsz.io/devternity.com/images/devchampions.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "bilderlings" : {
-        "name": "bilderlings",
-        "logo": "https://devternity.com/images/bilderlings.jpg",
+        "name": "Bilderlings",
+        "logo": "https://rsz.io/devternity.com/images/bilderlings.jpg?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     },
     "jebtbrains" : {
-        "name": "jebtbrains",
-        "logo": "https://devternity.com/images/jetbrains.png",
+        "name": "Jebtbrains",
+        "logo": "https://rsz.io/devternity.com/images/jetbrains.png?format=png&w=150&h=150&mode=pad",
         "id": "TDB"
     }
 }
