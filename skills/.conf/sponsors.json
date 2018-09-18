@@ -1,0 +1,47 @@
+{
+    "cognizant" : {
+        "name": "cognizant",
+        "logo" : "https://devternity.com/images/cognizant.png",
+        "id": "TDB"
+    },
+    "eas" : {
+        "name": "eas",
+        "logo" : "https://devternity.com/images/eas.png",
+        "id": "TDB"
+    },
+    "4finance" : {
+        "name": "4finance",
+        "logo": "https://devternity.com/images/4finance.png",
+        "id": "TDB"
+    },
+    "playtech" : {
+        "name": "playtech",
+        "logo": "https://devternity.com/images/playtech.jpg",
+        "id": "TDB"
+    },
+    "visma" : {
+        "name": "visma",
+        "logo": "https://devternity.com/images/visma.jpg",
+        "id": "TDB"
+    },
+    "printify" : {
+        "name": "printify",
+        "logo": "https://devternity.com/images/printify.png",
+        "id": "TDB"
+    },
+    "devchampions" : {
+        "name": "devchampions",
+        "logo": "https://devternity.com/images/devchampions.png",
+        "id": "TDB"
+    },
+    "bilderlings" : {
+        "name": "bilderlings",
+        "logo": "https://devternity.com/images/bilderlings.jpg",
+        "id": "TDB"
+    },
+    "jebtbrains" : {
+        "name": "jebtbrains",
+        "logo": "https://devternity.com/images/jetbrains.png",
+        "id": "TDB"
+    }
+}
