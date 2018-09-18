@@ -36,13 +36,16 @@ var bot_options = {
   scopes: ["bot", "chat:write:bot", "commands"]
 };
 
-const firebase_admin = require("firebase-admin");
-var firebaseServiceAccount = require(process.env.FIREBASE_URI);
-firebase_admin.initializeApp({ credential: firebase_admin.credential.cert(firebaseServiceAccount) });
-var firebase_db = firebase_admin.firestore();
-firebase_db.settings({ timestampsInSnapshots: true }); 
-bot_options.storage = require("botkit-storage-firestore")({ database: firebase_db });
-
+if(!!process.env.FIREBASE_URI){
+  const firebase_admin = require("firebase-admin");
+  var firebaseServiceAccount = require(process.env.FIREBASE_URI);
+  firebase_admin.initializeApp({ credential: firebase_admin.credential.cert(firebaseServiceAccount) });
+  var firebase_db = firebase_admin.firestore();
+  firebase_db.settings({ timestampsInSnapshots: true }); 
+  bot_options.storage = require("botkit-storage-firestore")({ database: firebase_db });
+} else {
+  bot_options.json_file_store = __dirname + '/.data/db/'; // store user data in a simple JSON format
+}
 // Create the Botkit controller, which controls all instances of the bot.
 const controller = Botkit.slackbot(bot_options);
 
