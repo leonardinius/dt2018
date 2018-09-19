@@ -2,37 +2,37 @@
     "cognizant" : {
         "name": "Cognizant",
         "logo" : "https://rsz.io/devternity.com/images/cognizant.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "eas" : {
         "name": "EstoniaAtWork",
         "logo" : "https://rsz.io/devternity.com/images/eas.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "4finance" : {
         "name": "4Finance",
         "logo": "https://rsz.io/devternity.com/images/4finance.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "playtech" : {
         "name": "Playtech",
         "logo": "https://rsz.io/devternity.com/images/playtech.jpg?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "visma" : {
         "name": "Visma",
         "logo": "https://rsz.io/devternity.com/images/visma.jpg?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "printify" : {
         "name": "Printify",
         "logo": "https://rsz.io/devternity.com/images/printify.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "devchampions" : {
         "name": "Devchampions",
         "logo": "https://rsz.io/devternity.com/images/devchampions.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     },
     "bilderlings" : {
         "name": "Bilderlings",
@@ -42,6 +42,6 @@
     "jebtbrains" : {
         "name": "Jebtbrains",
         "logo": "https://rsz.io/devternity.com/images/jetbrains.png?format=png&w=150&h=150&mode=pad",
-        "id": "TDB"
+        "id": "DCHCYTHG9"
     }
 }
