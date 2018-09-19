@@ -25,7 +25,7 @@ module.exports = function(controller) {
       const text = parts.slice(1).join(" ").trim() + "\n";
       bot.reply(message, {
         as_user: false,
-        username: "Job@" + sponsor.name,
+        username: "Jobs@" + sponsor.name,
         icon_url: sponsor.logo,
         text: text + t,
         attachments: [
