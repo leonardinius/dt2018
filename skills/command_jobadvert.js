@@ -1,4 +1,5 @@
 module.exports = function(controller) {
+
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   controller.on("slash_command", function(bot, message) {
@@ -10,14 +11,15 @@ module.exports = function(controller) {
     }
 
     if (message.command.startsWith("/jobadvert")) {
-      const parts = message.text.split("\n").join(" \n").split(" ").map(l => l.trimEnd());
-      let sponsorName = parts[0].trim();
+      const parts = message.text.match(/\n+|\S+/g);
+
+      let sponsorName = (parts[0] || '').trim();
       while (sponsorName.startsWith("@")) {
         sponsorName = sponsorName.substring(1);
       }
 
       const sponsor = sponsors[sponsorName.toLowerCase()];
-      if (!!!sponsor) {
+      if (!sponsor) {
         bot.replyPrivate( message, "Unsupported sponsor. Known sponsors are `" + Object.keys(sponsors).join(", ") + "`" + t );
         return;
       }
