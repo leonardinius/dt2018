@@ -68,7 +68,7 @@ module.exports = function(controller) {
       var newMessage = message.original_message;
       let text = newMessage.text.split('\n');
       text.pop();
-      text.push('' + ((newMessage.reply_count || 0) +1) + ' :+1: likes');
+      text.push(':+1: ' + ((newMessage.reply_count || 0) +1) + ' likes');
       newMessage.text = text.join('\n') + t;
       bot.replyInteractive(message, newMessage);
     }
