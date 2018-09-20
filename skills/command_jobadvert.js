@@ -11,7 +11,8 @@ module.exports = function(controller) {
     }
 
     if (message.command.startsWith("/jobadvert")) {
-      const parts = message.text.match(/\n+|\S+/g);
+      let text = message.text || '';
+      const parts = text.match(/\n+|\S+/g);
 
       let sponsorName = (parts[0] || '').trim();
       while (sponsorName.startsWith("@")) {
@@ -24,7 +25,7 @@ module.exports = function(controller) {
         return;
       }
 
-      const text = parts.slice(1).join(" ").trim() + "\n";
+      text = parts.slice(1).join(" ").trim() + "\n";
       bot.reply(message, {
         as_user: false,
         username: "Jobs@" + sponsor.name,
