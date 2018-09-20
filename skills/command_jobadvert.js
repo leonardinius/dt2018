@@ -61,19 +61,24 @@ module.exports = function(controller) {
     }
   });
 
-  controller.on("interactive_message_callback", function(bot, message) {
-    var t = ''; // "\nMessage:```" + JSON.stringify(message).replace('```', 'code') + "```";
+  controller.on("interactive_message_callback", function (bot, message) {
+    var t = ''; //"\nMessage:```" + JSON.stringify(message).replace('```', 'code') + "```";
     if (message.callback_id.startsWith("/jobadvert")) {
-      
-      message.ts = message.message_ts;
-      bot.replyInThread(message, ':star2: <@' + message.user + '> liked the post :star2:' + t);
 
-      var newMessage = message.original_message;
-      let text = newMessage.text.split('\n');
+      message.ts = message.message_ts;
+      const newMessageInThread = {};
+      newMessageInThread.as_user = message.original_message.as_user;
+      newMessageInThread.username = message.original_message.username;
+      newMessageInThread.icon_url = Object.values(message.original_message.icons || {})[0];
+      newMessageInThread.text = ':star2: <@' + message.user + '> liked the post :star2:' + t;
+      bot.replyInThread(message, newMessageInThread);
+
+      const newMessageUpdated = message.original_message;
+      let text = newMessageUpdated.text.split('\n');
       text.pop();
-      text.push(':+1: ' + ((newMessage.reply_count || 0) +1) + ' likes');
-      newMessage.text = text.join('\n') + t;
-      bot.replyInteractive(message, newMessage);
+      text.push(':+1: ' + ((newMessageUpdated.reply_count || 0) + 1) + ' likes');
+      newMessageUpdated.text = text.join('\n') + t;
+      bot.replyInteractive(message, newMessageUpdated);
     }
   });
 };
