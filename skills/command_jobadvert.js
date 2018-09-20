@@ -12,7 +12,7 @@ module.exports = function(controller) {
 
     if (message.command.startsWith("/jobadvert")) {
       let text = message.text || '';
-      const parts = text.match(/\n+|\S+/g);
+      const parts = text.match(/\n+|\S+/g) || [];
 
       let sponsorName = (parts[0] || '').trim();
       while (sponsorName.startsWith("@")) {
