@@ -8,7 +8,7 @@ module.exports = function(controller) {
     let newMessage = message.original_message
     let sponsor = message.user_id
     bot.replyInteractive(message, {
-        [
+        attachments: [
           {
             text: "",
             attachment_type: "default",
