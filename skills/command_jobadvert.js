@@ -3,10 +3,9 @@ module.exports = function(controller) {
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   controller.on("slash_command", function(bot, message) {
-    var t = ""; //"\nMessage:```" + JSON.stringify(message) + "```";
-
-    if (sponsors.includes(message.username) < 0) {
-      bot.replyPrivate( message, "Sorry, only sponsors can publish job ads " + t );
+    let sponsor = message.username
+    if (!sponsors.includes(sponsor)) {
+      bot.replyPrivate(message, "Sorry, only sponsors can publish job ads. ");
       return;
     }
 
@@ -44,9 +43,9 @@ module.exports = function(controller) {
           }
         ]
       });
-      bot.replyPrivate(message, "Published");
+      bot.replyPrivate(message, "Done!");
     } else {
-      bot.replyPrivate(message, "Could not post job advert" + t);
+      bot.replyPrivate(message, "Could not post job advertisement");
     }
   });
 
