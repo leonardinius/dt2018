@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/leonardinius/dt2018.svg?branch=master)](https://travis-ci.org/leonardinius/dt2018)
+
 # DT 2018 Santas little helper
 
 ## How-to local env
