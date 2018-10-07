@@ -3,11 +3,12 @@ module.exports = function(controller) {
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   
-  controller.hears(['jobIsHere'], "message_received", function(bot, message) {
+  controller.hears(['jobIsHere'], "ambient", function(bot, message) {
     
     let newMessage = message.original_message
     let sponsor = message.user_id
-    newMessage.attachments = [
+    bot.replyInteractive(message, {
+        [
           {
             text: "",
             attachment_type: "default",
@@ -29,8 +30,8 @@ module.exports = function(controller) {
               }
             ]
           }
-        ]
-    bot.replyInteractive(message, newMessage);    
+        ]      
+    });    
   });  
   
   
