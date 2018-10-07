@@ -1,47 +1,11 @@
-{
-    "cognizant" : {
-        "name": "Cognizant",
-        "logo" : "https://rsz.io/devternity.com/images/cognizant.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "eas" : {
-        "name": "WorkInEstonia",
-        "logo" : "https://rsz.io/devternity.com/images/eas.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "4finance" : {
-        "name": "4Finance",
-        "logo": "https://rsz.io/devternity.com/images/4finance.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "playtech" : {
-        "name": "Playtech",
-        "logo": "https://rsz.io/devternity.com/images/playtech.jpg?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "visma" : {
-        "name": "Visma",
-        "logo": "https://rsz.io/devternity.com/images/visma.jpg?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "printify" : {
-        "name": "Printify",
-        "logo": "https://rsz.io/devternity.com/images/printify.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "cloudvisor" : {
-        "name": "CloudVisor",
-        "logo": "https://devternity.com/images/cloudvisor.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "bilderlings" : {
-        "name": "Bilderlings",
-        "logo": "https://rsz.io/devternity.com/images/bilderlings.jpg?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    },
-    "jebtbrains" : {
-        "name": "JebBrains",
-        "logo": "https://rsz.io/devternity.com/images/jetbrains.png?format=png&w=150&h=150&mode=pad",
-        "id": "UCAT239UK"
-    }
-}
+[
+    "UDA9BC7C6",
+    "UD8U00U58",
+    "UD86BKBL0",
+    "UDA9APMHU",
+    "UD8A54QKT",
+    "UD868V1B2",
+    "UD8R9LTQT",
+    "UDA079M1D",
+    "UD943719T"
+]
