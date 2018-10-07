@@ -5,31 +5,20 @@ module.exports = function(controller) {
   controller.on("slash_command", function(bot, message) {
     var t = ""; //"\nMessage:```" + JSON.stringify(message) + "```";
 
-    if (admins.includes(message.username) < 0) {
-      bot.replyPrivate( message, "Only Staff Personell authorized to publish adverts." + t );
+    if (sponsors.includes(message.username) < 0) {
+      bot.replyPrivate( message, "Sorry, only sponsors can publish job ads " + t );
       return;
     }
 
     if (message.command.startsWith("/jobadvert")) {
+      
       let text = message.text || '';
       const parts = text.match(/\n+|\S+/g) || [];
 
-      let sponsorName = (parts[0] || '').trim();
-      while (sponsorName.startsWith("@")) {
-        sponsorName = sponsorName.substring(1);
-      }
-
-      const sponsor = sponsors[sponsorName.toLowerCase()];
-      if (!sponsor) {
-        bot.replyPrivate( message, "Unsupported sponsor. Known sponsors are `" + Object.keys(sponsors).join(", ") + "`" + t );
-        return;
-      }
-
       text = parts.slice(1).join(" ").trim() + "\n";
       bot.reply(message, {
-        as_user: message.username,
-        username: "Jobs@" + sponsor.name,
-        icon_url: sponsor.logo,
+        as_user: sponsor,
+        username: sponsor,
         text: text + t,
         attachments: [
           {
@@ -49,7 +38,7 @@ module.exports = function(controller) {
                 text: "Ask More",
                 type: "button",
                 style: "primary",
-                url: "slack://user?team=" + message.team_id + "&id=" + sponsor.id
+                url: "slack://user?team=" + message.team_id + "&id=" + sponsor
               }
             ]
           }
