@@ -3,38 +3,36 @@ module.exports = function(controller) {
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   
-  controller.hears('jobIsHere', "ambient", function(bot, message) {
+  controller.hears('jobIsHere', "ambient", function(bot, trigger) {
     
-    bot.whisper(message, 'Booo! This message is ephemeral and private to you')
+    // bot.whisper(message, 'Booo! This message is ephemeral and private to you')
 
+    let owner = trigger.user_id
+    let reply = trigger.original_message
 
-    // let newMessage = message.original_message
-    // let sponsor = message.user_id
-    // bot.replyInteractive(message, {
-    //     attachments: [
-    //       {
-    //         text: "",
-    //         attachment_type: "default",
-    //         callback_id: "/jobadvert",
-    //         actions: [
-    //           {
-    //             name: "like",
-    //             text: "Like",
-    //             value: "like",
-    //             type: "button",
-    //             style: "primary"
-    //           },
-    //           {
-    //             name: "ask-more",
-    //             text: "Ask More",
-    //             type: "button",
-    //             style: "primary",
-    //             url: "slack://user?team=" + message.team_id + "&id=" + sponsor
-    //           }
-    //         ]
-    //       }
-    //     ]      
-    // });  
+    reply.attachments.push({
+      text: "",
+      attachment_type: "default",
+      callback_id: "/jobadvert",
+      actions: [
+        {
+          name: "like",
+          text: "Like",
+          value: "like",
+          type: "button",
+          style: "primary"
+        },
+        {
+          name: "ask-more",
+          text: "Ask More",
+          type: "button",
+          style: "primary",
+          url: "slack://user?team=" + message.team_id + "&id=" + owner
+        }
+      ]
+    })
+    
+    bot.replyInteractive(trigger, reply);  
 
   });  
   
