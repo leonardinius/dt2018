@@ -52,7 +52,7 @@ module.exports = function(controller) {
   controller.on("message_received", function(bot, message) {
     
     let text = message.text
-    if (text.indexOf("#jobs") < 0) {
+    if (text.indexOf("jobIsHere") < 0) {
       return;
     }
     
