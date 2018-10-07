@@ -5,7 +5,7 @@ module.exports = function(controller) {
   controller.on("slash_command", function(bot, message) {
     let sponsor = message.user_id
     if (sponsors.indexOf(sponsor) < 0) {
-      bot.replyPrivate(message, `Sorry, only sponsors can publish job ads, but was ${sponsor}`);
+      bot.replyPrivate(message, `Sorry, only sponsors can publish job ads, but was ${message.user_name}`);
       return;
     }
 
@@ -16,8 +16,8 @@ module.exports = function(controller) {
 
       text = parts.slice(1).join(" ").trim() + "\n";
       bot.reply(message, {
-        as_user: sponsor,
-        username: sponsor,
+        as_user: true,
+        username: message.user_name,
         text: text,
         attachments: [
           {
