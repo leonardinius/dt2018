@@ -3,7 +3,7 @@ module.exports = function(controller) {
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   controller.on("slash_command", function(bot, message) {
-    let sponsor = message.username
+    let sponsor = message.user_id
     if (sponsors.indexOf(sponsor) < 0) {
       bot.replyPrivate(message, `Sorry, only sponsors can publish job ads, but was ${sponsor}`);
       return;
