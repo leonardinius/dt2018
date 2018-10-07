@@ -2,6 +2,43 @@ module.exports = function(controller) {
 
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
+  
+  controller.hears(['jobIsHere'], "message_received", function(bot, message) {
+    
+    let text = message.text
+    if (text.indexOf("jobIsHere") < 0) {
+      return;
+    }
+    
+    let newMessage = message.original_message
+    let sponsor = message.user_id
+    newMessage.attachments = [
+          {
+            text: "",
+            attachment_type: "default",
+            callback_id: "/jobadvert",
+            actions: [
+              {
+                name: "like",
+                text: "Like",
+                value: "like",
+                type: "button",
+                style: "primary"
+              },
+              {
+                name: "ask-more",
+                text: "Ask More",
+                type: "button",
+                style: "primary",
+                url: "slack://user?team=" + message.team_id + "&id=" + sponsor
+              }
+            ]
+          }
+        ]
+    bot.replyInteractive(message, newMessage);    
+  });  
+  
+  
   controller.on("slash_command", function(bot, message) {
     let sponsor = message.user_id
     if (sponsors.indexOf(sponsor) < 0) {
@@ -48,41 +85,6 @@ module.exports = function(controller) {
       bot.replyPrivate(message, "Could not post job advertisement");
     }
   });
-  
-  controller.on("message_received", function(bot, message) {
-    
-    let text = message.text
-    if (text.indexOf("jobIsHere") < 0) {
-      return;
-    }
-    
-    let newMessage = message.original_message
-    let sponsor = message.user_id
-    newMessage.attachments = [
-          {
-            text: "",
-            attachment_type: "default",
-            callback_id: "/jobadvert",
-            actions: [
-              {
-                name: "like",
-                text: "Like",
-                value: "like",
-                type: "button",
-                style: "primary"
-              },
-              {
-                name: "ask-more",
-                text: "Ask More",
-                type: "button",
-                style: "primary",
-                url: "slack://user?team=" + message.team_id + "&id=" + sponsor
-              }
-            ]
-          }
-        ]
-    bot.replyInteractive(message, newMessage);    
-  })
 
   controller.on("interactive_message_callback", function (bot, message) {
     var t = ''; //"\nMessage:```" + JSON.stringify(message).replace('```', 'code') + "```";
