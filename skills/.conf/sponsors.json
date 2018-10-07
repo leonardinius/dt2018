@@ -5,7 +5,7 @@
         "id": "UCAT239UK"
     },
     "eas" : {
-        "name": "EstoniaAtWork",
+        "name": "WorkInEstonia",
         "logo" : "https://rsz.io/devternity.com/images/eas.png?format=png&w=150&h=150&mode=pad",
         "id": "UCAT239UK"
     },
@@ -29,9 +29,9 @@
         "logo": "https://rsz.io/devternity.com/images/printify.png?format=png&w=150&h=150&mode=pad",
         "id": "UCAT239UK"
     },
-    "devchampions" : {
-        "name": "Devchampions",
-        "logo": "https://rsz.io/devternity.com/images/devchampions.png?format=png&w=150&h=150&mode=pad",
+    "cloudvisor" : {
+        "name": "CloudVisor",
+        "logo": "https://devternity.com/images/cloudvisor.png?format=png&w=150&h=150&mode=pad",
         "id": "UCAT239UK"
     },
     "bilderlings" : {
@@ -40,7 +40,7 @@
         "id": "UCAT239UK"
     },
     "jebtbrains" : {
-        "name": "Jebtbrains",
+        "name": "JebBrains",
         "logo": "https://rsz.io/devternity.com/images/jetbrains.png?format=png&w=150&h=150&mode=pad",
         "id": "UCAT239UK"
     }
