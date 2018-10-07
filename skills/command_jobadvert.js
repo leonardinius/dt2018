@@ -18,7 +18,7 @@ module.exports = function(controller) {
       bot.reply(message, {
         as_user: sponsor,
         username: sponsor,
-        text: text + t,
+        text: text,
         attachments: [
           {
             text: "",
