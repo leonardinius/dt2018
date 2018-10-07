@@ -8,31 +8,37 @@ module.exports = function(controller) {
     // bot.whisper(message, 'Booo! This message is ephemeral and private to you')
 
     let owner = trigger.user_id
-    let reply = trigger.original_message
+    // let reply = trigger.original_message
 
-    reply.attachments.push({
-      text: "",
-      attachment_type: "default",
-      callback_id: "/jobadvert",
-      actions: [
+    bot.api.chat.update({
+      token: process.env.token,
+      channel: trigger.channel,
+      text: trigger.text,
+      ts: trigger.ts,
+      attachments: [
         {
-          name: "like",
-          text: "Like",
-          value: "like",
-          type: "button",
-          style: "primary"
-        },
-        {
-          name: "ask-more",
-          text: "Ask More",
-          type: "button",
-          style: "primary",
-          url: "slack://user?team=" + message.team_id + "&id=" + owner
-        }
+          text: "",
+          attachment_type: "default",
+          callback_id: "/jobadvert",
+          actions: [
+            {
+              name: "like",
+              text: "Like",
+              value: "like",
+              type: "button",
+              style: "primary"
+            },
+            {
+              name: "ask-more",
+              text: "Ask More",
+              type: "button",
+              style: "primary",
+              url: "slack://user?team=" + message.team_id + "&id=" + owner
+            }
+          ]
+        }        
       ]
     })
-    
-    bot.replyInteractive(trigger, reply);  
 
   });  
   
