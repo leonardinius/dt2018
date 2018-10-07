@@ -4,8 +4,8 @@ module.exports = function(controller) {
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   controller.on("slash_command", function(bot, message) {
     let sponsor = message.username
-    if (!sponsors.includes(sponsor)) {
-      bot.replyPrivate(message, "Sorry, only sponsors can publish job ads. ");
+    if (sponsors.indexOf(sponsor) < 0) {
+      bot.replyPrivate(message, `Sorry, only sponsors can publish job ads, but was ${sponsor}`);
       return;
     }
 
