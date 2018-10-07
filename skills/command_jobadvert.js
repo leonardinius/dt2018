@@ -5,11 +5,6 @@ module.exports = function(controller) {
   
   controller.hears(['jobIsHere'], "message_received", function(bot, message) {
     
-    let text = message.text
-    if (text.indexOf("jobIsHere") < 0) {
-      return;
-    }
-    
     let newMessage = message.original_message
     let sponsor = message.user_id
     newMessage.attachments = [
