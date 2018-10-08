@@ -11,7 +11,7 @@ module.exports = function(controller) {
     // let reply = trigger.original_message
 
     bot.api.chat.update({
-      token: process.env.token,
+      token: trigger.token,
       channel: trigger.channel,
       text: trigger.text,
       ts: trigger.ts,
