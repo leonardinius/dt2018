@@ -14,7 +14,7 @@ module.exports = function(controller) {
       token: trigger.token,
       channel: trigger.channel,
       text: trigger.text,
-      ts: trigger.message_ts,
+      ts: trigger.ts,
       attachments: [
         {
           text: "",
