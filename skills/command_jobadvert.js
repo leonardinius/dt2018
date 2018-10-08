@@ -5,7 +5,7 @@ module.exports = function(controller) {
   
   controller.hears('jobIsHere', "ambient", function(bot, trigger) {
     
-    // bot.whisper(message, 'Booo! This message is ephemeral and private to you')
+    bot.whisper(trigger,  `${trigger.token}/${trigger.channel}/${trigger.text}/${trigger.ts}/${trigger.message_ts}`)
 
     let owner = trigger.user_id
     // let reply = trigger.original_message
@@ -14,7 +14,7 @@ module.exports = function(controller) {
       token: trigger.token,
       channel: trigger.channel,
       text: trigger.text,
-      ts: trigger.ts,
+      ts: trigger.message_ts,
       attachments: [
         {
           text: "",
@@ -33,7 +33,7 @@ module.exports = function(controller) {
               text: "Ask More",
               type: "button",
               style: "primary",
-              url: "slack://user?team=" + message.team_id + "&id=" + owner
+              url: "slack://user?team=" + trigger.team_id + "&id=" + owner
             }
           ]
         }        
