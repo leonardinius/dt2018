@@ -2,90 +2,58 @@ module.exports = function(controller) {
 
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
-  
-  controller.hears('jobIsHere', "ambient", function(bot, trigger) {
-    
-    bot.whisper(trigger,  `${trigger.token}/${trigger.channel}/${trigger.text}/${trigger.ts}/${trigger.message_ts}`)
-
-    let owner = trigger.user_id
-    // let reply = trigger.original_message
-
-    bot.api.chat.update({
-      token: trigger.token,
-      channel: trigger.channel,
-      ts: trigger.ts,
-      attachments: JSON.stringify([
-        {
-          text: trigger.text,
-          attachment_type: "default",
-          callback_id: "/jobadvert",
-          actions: [
-            {
-              name: "like",
-              text: "Like",
-              value: "like",
-              type: "button",
-              style: "primary"
-            },
-            {
-              name: "ask-more",
-              text: "Ask More",
-              type: "button",
-              style: "primary",
-              url: "slack://user?team=" + trigger.team_id + "&id=" + owner
-            }
-          ]
-        }        
-      ])
-    })
-
-  });  
-  
-  
   controller.on("slash_command", function(bot, message) {
-    let sponsor = message.user_id
+    var t = ""; //"\nMessage:```" + JSON.stringify(message) + "```";
+
+    let sponsor = message.username
     if (sponsors.indexOf(sponsor) < 0) {
-      bot.replyPrivate(message, `Sorry, only sponsors can publish job ads, but was ${message.user_name}`);
+      bot.replyPrivate(message, "Sorry, only sponsors can publish job ads ");
       return;
     }
 
     if (message.command.startsWith("/jobadvert")) {
       
-      let text = message.text || '';
-      const parts = text.match(/\n+|\S+/g) || [];
-
-      text = parts.slice(1).join(" ").trim() + "\n";
-      bot.reply(message, {
-        as_user: true,
-        username: message.user_name,
-        text: text,
-        attachments: [
-          {
-            text: "",
-            attachment_type: "default",
-            callback_id: message.command,
-            actions: [
-              {
-                name: "like",
-                text: "Like",
-                value: "like",
-                type: "button",
-                style: "primary"
-              },
-              {
-                name: "ask-more",
-                text: "Ask More",
-                type: "button",
-                style: "primary",
-                url: "slack://user?team=" + message.team_id + "&id=" + sponsor
-              }
-            ]
-          }
-        ]
+      bot.getUser(message.user).then(function(profile, err) {  
+        console.log(profile)
+        console.log(err)
+        let text = message.text || '';
+        const parts = text.match(/\n+|\S+/g) || [];
+  
+        text = parts.slice(1).join(" ").trim() + "\n";
+        bot.reply(message, {
+          as_user: false,
+          username: "<@${" + message.user + "}>",
+          icon_url: sponsor.logo,
+          text: text + t,
+          attachments: [
+            {
+              text: "",
+              attachment_type: "default",
+              callback_id: message.command,
+              actions: [
+                {
+                  name: "like",
+                  text: "Like",
+                  value: "like",
+                  type: "button",
+                  style: "primary"
+                },
+                {
+                  name: "ask-more",
+                  text: "Ask More",
+                  type: "button",
+                  style: "primary",
+                  url: "slack://user?team=" + message.team_id + "&id=" + sponsor
+                }
+              ]
+            }
+          ]
+        });    
+        bot.replyPrivate(message, "Published");    
       });
-      bot.replyPrivate(message, "Done!");
+
     } else {
-      bot.replyPrivate(message, "Could not post job advertisement");
+      bot.replyPrivate(message, "Could not post job advert" + t);
     }
   });
 
