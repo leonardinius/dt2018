@@ -13,11 +13,10 @@ module.exports = function(controller) {
     bot.api.chat.update({
       token: trigger.token,
       channel: trigger.channel,
-      text: trigger.text,
       ts: trigger.ts,
       attachments: [
         {
-          text: "",
+          text: trigger.text,
           attachment_type: "default",
           callback_id: "/jobadvert",
           actions: [
