@@ -14,7 +14,7 @@ module.exports = function(controller) {
       token: trigger.token,
       channel: trigger.channel,
       ts: trigger.ts,
-      attachments: [
+      attachments: JSON.stringify([
         {
           text: trigger.text,
           attachment_type: "default",
@@ -36,7 +36,7 @@ module.exports = function(controller) {
             }
           ]
         }        
-      ]
+      ])
     })
 
   });  
