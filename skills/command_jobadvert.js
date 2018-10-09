@@ -3,7 +3,7 @@ module.exports = function(controller) {
   const admins = require(__dirname + "/.conf/admins.json");
   const sponsors = require(__dirname + "/.conf/sponsors.json");
   
-  controller.on("slash_command", function(bot, message) {
+  controller.hears('(.*)', "ambient", function(bot, message) {
     
     let sponsor = message.user
     
