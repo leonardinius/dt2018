@@ -5,7 +5,7 @@ module.exports = function(controller) {
   controller.on("slash_command", function(bot, message) {
     var t = ""; //"\nMessage:```" + JSON.stringify(message) + "```";
 
-    let sponsor = message.username
+    let sponsor = message.user
     if (sponsors.indexOf(sponsor) < 0) {
       bot.replyPrivate(message, "Sorry, only sponsors can publish job ads ");
       return;
